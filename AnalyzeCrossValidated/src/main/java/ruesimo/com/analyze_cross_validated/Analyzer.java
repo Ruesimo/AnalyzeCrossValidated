@@ -111,16 +111,7 @@ public class Analyzer {
 			query = query.substring(0, query.length() - 4);
 			query += ") and("
 
-			+ "x.text_blob like concat('% ', s.subject, '%')"/* or "
-
-			+ "x.text_blob like concat('% ', s.subject_processed, '%') or "
-
-			+ "(x.text_blob like concat('%', s.`1_part`, '%') and "
-					+ "x.text_blob like concat('%', s.`2_part`, '%') and "
-					+ "x.text_blob like concat('%', s.`3_part`, '%') and "
-					+ "x.text_blob like concat('%', s.`4_part`, '%') and "
-					+ "x.text_blob like concat('%', s.`5_part`, '%')" + ")"
-					+ */+") " + "group by s.subject;";
+			+ "x.text_blob like concat('% ', s.subject, '%')"+") " + "group by s.subject;";
 
 			resultSet = statement.executeQuery(query);
 
@@ -280,16 +271,7 @@ public class Analyzer {
 
 					+ "and ( "
 
-					+ "x.text_blob like concat('%', s.subject, '%')"/* or "
-
-					+ "x.text_blob like concat('%', s.subject_processed, '%') or "
-
-					+ "(x.text_blob like concat('%', s.`1_part`, '%') and "
-					+ "x.text_blob like concat('%', s.`2_part`, '%') and "
-					+ "x.text_blob like concat('%', s.`3_part`, '%') and "
-					+ "x.text_blob like concat('%', s.`4_part`, '%') and "
-					+ "x.text_blob like concat('%', s.`5_part`, '%') "
-					+ ") "*/
+					+ "x.text_blob like concat('%', s.subject, '%')"
 					+ ") "
 					+ "order by x.votes "
 					+ ") as t1, "
@@ -304,16 +286,7 @@ public class Analyzer {
 
 					+ "and ( "
 
-					+ "x.text_blob like concat('%', s.subject, '%') "/*or "
-
-					+ "x.text_blob like concat('%', s.subject_processed, '%') or "
-
-					+ "(x.text_blob like concat('%', s.`1_part`, '%') and "
-					+ "x.text_blob like concat('%', s.`2_part`, '%') and "
-					+ "x.text_blob like concat('%', s.`3_part`, '%') and "
-					+ "x.text_blob like concat('%', s.`4_part`, '%') and "
-					+ "x.text_blob like concat('%', s.`5_part`, '%') "
-					+ ") "*/
+					+ "x.text_blob like concat('%', s.subject, '%') "
 					+ ") "
 					+ ") as t2 "
 					+ "WHERE t1.row_number in ( floor((total_rows+1)/2), floor((total_rows+2)/2) );";
